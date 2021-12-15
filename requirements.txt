@@ -3,3 +3,4 @@ requests
 dash
 plotly
 numpy
+gunicorn
