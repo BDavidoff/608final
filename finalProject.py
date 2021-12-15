@@ -74,7 +74,7 @@ df = DoWork()
 df_A = df[df['score'] == 'A']
 df_B = df[df['score'] == 'B']
 df_C = df[df['score'] == 'C']
-
+print("sub groups made")
 fig = px.scatter_mapbox(
 	df,
 	hover_data=['dba', 'grade'],
@@ -85,5 +85,6 @@ fig = px.scatter_mapbox(
 	color_continuous_scale=px.colors.cyclical.IceFire, 
 	size_max=15, 
 	zoom=10)
-
+print("mapbox complete")
 fig.show()
+print("program complete")
