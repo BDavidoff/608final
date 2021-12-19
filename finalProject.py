@@ -11,7 +11,7 @@ import numpy as np
 def GetData(source):
 	print(f"Getting data from: {source}")
 	limit         = 100000
-	offset        = 300000
+	offset        = 0
 	data          = []
 
 	while True:
