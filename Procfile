@@ -1,0 +1,1 @@
+web: gunicorn finalProject:server=app.server

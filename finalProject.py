@@ -65,16 +65,32 @@ def DoWork():
 	print("data frame complete")
 	return df_recent
 
+def plot_data(df):    
+	fig = go.Figure()
+	fig.add_trace(go.Scatter(
+					x=df.index,
+					y=df['cuisine_description'],
+					name="cuisine_description",
+					line_color='blueviolet',
+					opacity=0.8))
+
+	fig.add_trace(go.Scatter(
+					x=df.index,
+					y=df['boro'],
+					name="boro",
+					line_color='green',
+					opacity=0.8))
+
+	fig.update_layout(title_text='Explore data',
+				  xaxis_rangeslider_visible=True)   
+	fig.show()
+
+
 
 t = r'pk.eyJ1IjoibGluY2FycmllbGkiLCJhIjoiY2t4N3B0MGIyMGVsdDJucWhrMmptdDJmcSJ9.-LIUF4fIPi7_Is_71waYkQ'
 px.set_mapbox_access_token(t)
 df = DoWork()
 
-#data groups
-df_A = df[df['score'] == 'A']
-df_B = df[df['score'] == 'B']
-df_C = df[df['score'] == 'C']
-print("sub groups made")
 fig = px.scatter_mapbox(
 	df,
 	hover_data=['dba', 'grade'],
@@ -84,7 +100,13 @@ fig = px.scatter_mapbox(
 	size="score", 
 	color_continuous_scale=px.colors.cyclical.IceFire, 
 	size_max=15, 
+	title="NYC Resturant Information",
 	zoom=10)
-print("mapbox complete")
 fig.show()
-print("program complete")
+
+df_boro = df.groupby(['boro','score']).count().reset_index()
+print(df_boro.info())
+fig1 = px.Bar(df_boro, x="boro", y="score", color='boro')
+fig1.show()
+
+#plot_data(df)
